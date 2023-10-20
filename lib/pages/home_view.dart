@@ -15,7 +15,7 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GetX<MyController>(
+            GetBuilder<MyController>(
                 init: MyController(),
                 builder: (controller) => Text(
                       "${controller.count}",
