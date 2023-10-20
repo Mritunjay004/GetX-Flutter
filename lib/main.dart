@@ -1,28 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'package:getx/pages/first_page.dart';
-import 'package:getx/pages/second_page.dart';
-import 'package:getx/pages/unknown_page.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  var count = 0.obs;
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "first",
-      defaultTransition: Transition.leftToRight,
-      getPages: [
-        GetPage(name: "/first", page: () => const FirstPage()),
-        GetPage(name: "/second", page: () => const SecondPage()),
-      ],
-      unknownRoute:
-          GetPage(name: "/notfound", page: () => const UnknownRoutePage()),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Obx Example"),
+        ),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Obx(
+                () => Text(
+                  "Count value is ${count.value}",
+                  style: const TextStyle(fontSize: 25),
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    count++;
+                  },
+                  child: const Text("Increment"))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
