@@ -7,4 +7,18 @@ class MyController extends GetxController {
     count++;
     update();
   }
+
+  @override
+  void onInit() {
+    print("onInit");
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    print("onClose");
+    // TODO: implement onClose
+    super.onClose();
+  }
 }
