@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:getx/my_controller.dart';
 
 class HomeView extends StatelessWidget {
-  var myController = Get.put(MyController());
+  // var myController = Get.put(MyController());
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,16 @@ class HomeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(() => Text(
-                  "${myController.count}",
-                  style: const TextStyle(fontSize: 30),
-                )),
+            GetX<MyController>(
+                init: MyController(),
+                builder: (controller) => Text(
+                      "${controller.count}",
+                      style: const TextStyle(fontSize: 30),
+                    )),
             ElevatedButton(
                 onPressed: () {
-                  myController.increment();
+                  // myController.increment();
+                  Get.find<MyController>().increment();
                 },
                 child: const Text('Increment'))
           ],
