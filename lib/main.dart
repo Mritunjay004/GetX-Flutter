@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:getx/next_page.dart';
+import 'package:getx/pages/first_page.dart';
+import 'package:getx/pages/second_page.dart';
+import 'package:getx/pages/unknown_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,35 +15,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Hello World')),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  Get.off(NextPage());
-                  // Get.offAll(NextPage());
-                  // var a = await Get.to(
-                  //   () => NextPage(),
-                  //   arguments: "Hello World",
-                  // );
-
-                  // print(a);
-                },
-                child: Container(
-                  color: Colors.red,
-                  width: 100,
-                  height: 100,
-                ),
-              ),
-              Text("navigate")
-            ],
-          ),
-        ),
-      ),
+      initialRoute: "first",
+      defaultTransition: Transition.leftToRight,
+      getPages: [
+        GetPage(name: "/first", page: () => const FirstPage()),
+        GetPage(name: "/second", page: () => const SecondPage()),
+      ],
+      unknownRoute:
+          GetPage(name: "/notfound", page: () => const UnknownRoutePage()),
     );
   }
 }
